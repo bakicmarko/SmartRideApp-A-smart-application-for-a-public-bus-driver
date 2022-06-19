@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_ride_app/models/weather_forcast.dart';
+import 'package:smart_ride_app/providers/home_screen_provider.dart';
 import 'dart:math';
 import 'dart:async';
 
 import 'package:smart_ride_app/theme/theme.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({Key? key}) : super(key: key);
+  DetailsScreen({Key? key, required this.provider}) : super(key: key);
+
+  HomeProvider provider;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +49,6 @@ class _StatusDetailState extends State<StatusDetail> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       setState(() {});
     });
@@ -139,6 +142,8 @@ class _RoadConditiondDetailsState extends State<RoadConditiondDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<HomeProvider>();
+
     TextStyle emphText = Theme.of(context).textTheme.bodyMedium!.copyWith(color: importandTextColor);
 
     var rng = Random();
@@ -172,15 +177,34 @@ class _RoadConditiondDetailsState extends State<RoadConditiondDetails> {
           children: [const Text("Warnings"), Text(warnings.elementAt(rng.nextInt(warnings.length)), style: emphText)],
         ),
         smallHeightDivideBox,
+        provider.state.maybeWhen(
+          orElse: () => Container(),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          success: (weather) {
+            return _WeatherForcastView(weather: weather);
+          },
+        ),
       ],
     );
   }
 }
 
+class _WeatherForcastView extends StatelessWidget {
+  const _WeatherForcastView({Key? key, required this.weather}) : super(key: key);
+
+  final WeatherForcast weather;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(weather.precipitation.toString());
+  }
+}
+
 class CabinDetails extends StatelessWidget {
   CabinDetails({Key? key}) : super(key: key);
-  double containerSize = defaultButtonHeight * 2.2;
-  BoxDecoration boxDecoration = BoxDecoration(
+
+  final double containerSize = defaultButtonHeight * 2.2;
+  final BoxDecoration boxDecoration = BoxDecoration(
     color: primaryGreyColor.withOpacity(.4),
     borderRadius: smallBorderRadius,
   );

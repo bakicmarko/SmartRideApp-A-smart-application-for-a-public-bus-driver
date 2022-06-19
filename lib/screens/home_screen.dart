@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_ride_app/providers/home_screen_provider.dart';
 import 'package:smart_ride_app/screens/details_screen.dart';
 import 'package:smart_ride_app/theme/theme.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => HomeProvider(context.read(), context.read()),
+      child: const HomeScreenContent(),
+    );
+  }
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenContent extends StatefulWidget {
+  const HomeScreenContent({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreenContent> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreenContent> {
   final bottomScheetController = DraggableScrollableController();
   final isDriving = true;
   double minBottomSheet = 0.2;
@@ -28,82 +42,74 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         extendBody: true,
         resizeToAvoidBottomInset: false,
-        body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            color: Colors.red,
-            child: Stack(
-              children: [
-                GoogleMapsEmpty(),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: defaultPaddingValue, vertical: defaultPaddingValue + 5),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () => {anim()},
-                        style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                              fixedSize:
-                                  MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
-                              minimumSize:
-                                  MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
-                              shape:
-                                  MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: defaultBorderRadius)),
-                              padding: MaterialStateProperty.all(EdgeInsets.zero),
-                            ),
-                        child: const Icon(Icons.menu),
-                      ),
-                      defaultWidthDivideBox,
-                      Expanded(
-                        child: Material(
-                          elevation: elevatedButtonElevation,
-                          shadowColor: primaryGreyColor,
-                          shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
-                          child: SizedBox(
-                            height: defaultButtonHeight,
-                            child: TextFormField(
-                              textAlignVertical: TextAlignVertical.bottom,
-                              decoration: const InputDecoration(
-                                prefixIcon: Icon(Icons.search),
-                                hintText: "Search location",
-                                filled: true,
-                                fillColor: secondaryTextColor,
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
-                              ),
-                            ),
+        body: Stack(
+          children: [
+            GoogleMapsEmpty(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: defaultPaddingValue, vertical: defaultPaddingValue + 5),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => {anim()},
+                    style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                          fixedSize: MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
+                          minimumSize: MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: defaultBorderRadius)),
+                          padding: MaterialStateProperty.all(EdgeInsets.zero),
+                        ),
+                    child: const Icon(Icons.menu),
+                  ),
+                  defaultWidthDivideBox,
+                  Expanded(
+                    child: Material(
+                      elevation: elevatedButtonElevation,
+                      shadowColor: primaryGreyColor,
+                      shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
+                      child: SizedBox(
+                        height: defaultButtonHeight,
+                        child: TextFormField(
+                          textAlignVertical: TextAlignVertical.bottom,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.search),
+                            hintText: "Search location",
+                            filled: true,
+                            fillColor: secondaryTextColor,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                DraggableScrollableSheet(
-                  controller: bottomScheetController,
-                  initialChildSize: initialChildSize,
-                  minChildSize: minBottomSheet,
-                  snap: true,
-                  snapSizes: const [0.9],
-                  builder: (BuildContext context, ScrollController scrollController) {
-                    return Container(
-                      /// shadowColor: primaryGreyColor,
-                      /// shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-                          boxShadow: [
-                            BoxShadow(color: primaryGreyColor, spreadRadius: .5, blurRadius: 5, offset: Offset(0, -0.5))
-                          ]),
-                      child: SingleChildScrollView(
-                        controller: scrollController,
-                        child: CustomScrollViewContent(isDriving: isDriving),
                       ),
-                    );
-                  },
-                ),
-              ],
-            )),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            DraggableScrollableSheet(
+              controller: bottomScheetController,
+              initialChildSize: initialChildSize,
+              minChildSize: minBottomSheet,
+              snap: true,
+              snapSizes: const [0.9],
+              builder: (BuildContext context, ScrollController scrollController) {
+                return Container(
+                  /// shadowColor: primaryGreyColor,
+                  /// shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+                      boxShadow: [
+                        BoxShadow(color: primaryGreyColor, spreadRadius: .5, blurRadius: 5, offset: Offset(0, -0.5))
+                      ]),
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    child: CustomScrollViewContent(isDriving: isDriving),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -127,6 +133,7 @@ class _CustomScrollViewContentState extends State<CustomScrollViewContent> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<HomeProvider>();
     return Column(
       children: [
         Container(
@@ -175,7 +182,7 @@ class _CustomScrollViewContentState extends State<CustomScrollViewContent> {
         ),
         widget.isDriving ? _RideShortInfo() : Container(),
         widget.isDriving ? divider : Container(),
-        DetailsScreen(),
+        DetailsScreen(provider: provider),
         // drive info
         // endbtn
         // together
