@@ -4,6 +4,7 @@ import 'package:smart_ride_app/models/weather_forcast.dart';
 import 'package:smart_ride_app/providers/home_screen_provider.dart';
 import 'dart:math';
 import 'dart:async';
+import 'package:intl/intl.dart';
 
 import 'package:smart_ride_app/theme/theme.dart';
 
@@ -176,7 +177,7 @@ class _RoadConditiondDetailsState extends State<RoadConditiondDetails> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [const Text("Warnings"), Text(warnings.elementAt(rng.nextInt(warnings.length)), style: emphText)],
         ),
-        smallHeightDivideBox,
+        defaultHeightDivideBox,
         provider.state.maybeWhen(
           orElse: () => Container(),
           loading: () => const Center(child: CircularProgressIndicator()),
@@ -190,13 +191,155 @@ class _RoadConditiondDetailsState extends State<RoadConditiondDetails> {
 }
 
 class _WeatherForcastView extends StatelessWidget {
-  const _WeatherForcastView({Key? key, required this.weather}) : super(key: key);
+  _WeatherForcastView({Key? key, required this.weather}) : super(key: key);
 
   final WeatherForcast weather;
+  final List<String> weatherNames = ['Sunny', 'Rain', 'Show', 'Cloudy'];
+  final List<Icon> weatherIcons = [
+    Icon(Icons.sunny, color: Colors.white, size: defaultButtonHeight),
+    Icon(Icons.cloudy_snowing, color: Colors.white, size: defaultButtonHeight),
+    Icon(Icons.snowing, color: Colors.white, size: defaultButtonHeight),
+    Icon(Icons.cloud, color: Colors.white, size: defaultButtonHeight),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Text(weather.precipitation.toString());
+    final now = DateTime.now();
+    String formatter = DateFormat('yMd').format(now); // 28/03/2020
+    double sInfo = defaultButtonHeight * 2.3;
+    return Theme(
+      data: Theme.of(context).copyWith(
+          textTheme: Theme.of(context).textTheme.copyWith(bodyMedium: Theme.of(context).textTheme.displaySmall)),
+      child: Material(
+        elevation: elevatedButtonElevation / 2,
+        shadowColor: primaryGreyColor,
+        shape: RoundedRectangleBorder(borderRadius: smallBorderRadius),
+        child: Container(
+          height: defaultButtonHeight * 2.5,
+          decoration: BoxDecoration(color: primaryBlueColor, borderRadius: smallBorderRadius),
+          child: Row(children: [
+            Expanded(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  weatherIcons.elementAt(weather.weather),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10, top: 0),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          child: Align(
+                              alignment: Alignment.center,
+                              child: Text("20", style: Theme.of(context).textTheme.displayLarge)),
+                        ),
+                        Positioned(
+                            top: 0,
+                            left: sInfo / 1.7,
+                            child: Text("°C",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .copyWith(fontSize: 22, fontWeight: FontWeight.normal))),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: double.infinity,
+              width: 2,
+              color: Colors.white,
+            ),
+            Expanded(
+              flex: 3,
+              child: Padding(
+                padding: defaultHorizontalPadding,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(formatter),
+                          smallestHeightDivideBox,
+                          Text(weatherNames.elementAt(weather.weather)),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: sInfo,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text('Wind',
+                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                                  Text('${weather.wind.toString()} km/h', style: const TextStyle(color: Colors.white)),
+                                ],
+                              ),
+                            ),
+                            smallestHeightDivideBox,
+                            SizedBox(
+                              width: sInfo,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text('Pressure',
+                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                                  Text('${weather.pressure.toString()} hPa',
+                                      style: const TextStyle(color: Colors.white)),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: sInfo,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text('Humidity',
+                                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                                  Text('${weather.humidity.toString()} %', style: const TextStyle(color: Colors.white)),
+                                ],
+                              ),
+                            ),
+                            smallestHeightDivideBox,
+                            SizedBox(
+                              width: sInfo,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text('Precipitation',
+                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                                  Text('${weather.precipitation.toString()} %',
+                                      style: const TextStyle(color: Colors.white)),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ]),
+        ),
+      ),
+    );
   }
 }
 

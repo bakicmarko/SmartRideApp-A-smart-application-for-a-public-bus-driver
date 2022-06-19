@@ -20,8 +20,11 @@ class WeatherForcast {
   int humidity;
   @HiveField(4)
   int precipitation;
+  @HiveField(5)
+  int wind;
 
-  WeatherForcast(this.id, this.temperature, this.weather, this.pressure, this.humidity, this.precipitation) {
+  WeatherForcast(this.id, this.temperature, this.weather, this.pressure, this.humidity, this.precipitation)
+      : wind = weather {
     var rng = Random();
     if (temperature > 35) {
       temperature = rng.nextInt(20) + 10;
@@ -35,17 +38,18 @@ class WeatherForcast {
     if (precipitation > 100) {
       precipitation = rng.nextInt(80) + 20;
     }
+    if (wind > 40) {
+      wind = ((wind % 3) + 1) * 3;
+    }
 
     if (weather % 6 == 0) {
-      weather = 6;
-    } else if (weather % 4 == 0) {
-      weather = 4;
+      weather = 2;
     } else if (weather % 5 == 0) {
-      weather = 5;
-    } else if (weather % 3 == 0) {
       weather = 3;
+    } else if (weather % 3 == 0) {
+      weather = 4;
     } else {
-      weather = 7;
+      weather = 1;
     }
   }
 
