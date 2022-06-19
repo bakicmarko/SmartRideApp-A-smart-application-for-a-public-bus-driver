@@ -9,18 +9,27 @@ const Color secondaryTextColor = Colors.white;
 const Color importandTextColor = primaryBlueColor;
 const Color titleTextColor = Colors.black;
 
+const Color redColor = Color.fromRGBO(234, 67, 53, 1);
+
 const double defaultBodyFontSize = 9;
 const double mediumBodyFontSize = 12;
-const double largeBodyFontSize = 20;
+const double largeBodyFontSize = 40;
 
 const double titleSmallFontSize = 10;
+const double titleDefaultFontSize = 15;
 const double titleLargeFontSize = 45;
 
-const FontWeight defaultBoldWeight = FontWeight.bold;
+const double displayMediumFontSize = 17;
+
+const FontWeight defaultBoldWeight = FontWeight.w500;
 
 const EdgeInsetsGeometry defaultButtonPadding = EdgeInsets.all(15);
 const double elevatedButtonElevation = 10;
+
+const double smallButtonHeight = 35;
 const double defaultButtonHeight = 45;
+
+const double smallButtonWidth = 90;
 const double defaultButtonWidth = 120;
 
 const double defaultButtonBorderRadius = 20;
@@ -30,14 +39,23 @@ const double defaultButtonTextFontSize = 15;
 const double defaultPaddingValue = 20;
 const double mediumPaddingValue = 30;
 const EdgeInsetsGeometry mediumAllOutsidePadding = EdgeInsets.all(mediumPaddingValue);
+const EdgeInsetsGeometry defaultHorizontalPadding = EdgeInsets.symmetric(horizontal: defaultPaddingValue);
+const EdgeInsetsGeometry defaultVerticalPadding = EdgeInsets.symmetric(vertical: defaultPaddingValue);
 
+const SizedBox smallestHeightDivideBox = SizedBox(height: 5);
+const SizedBox smallHeightDivideBox = SizedBox(height: 14);
 const SizedBox defaultHeightDivideBox = SizedBox(height: 20);
 const SizedBox mediumHeightDivideBox = SizedBox(height: 30);
 
+const SizedBox smallWidthDivideBox = SizedBox(width: 5);
 const SizedBox defaultWidthDivideBox = SizedBox(width: 20);
 const SizedBox mediumWidthDivideBox = SizedBox(width: 30);
+const SizedBox largeWidthDivideBox = SizedBox(width: 45);
 
+BorderRadius smallBorderRadius = BorderRadius.circular(15);
 BorderRadius defaultBorderRadius = BorderRadius.circular(30);
+
+Divider divider = Divider(thickness: 2, color: primaryGreyColor.withOpacity(.5));
 
 final ThemeData theme = ThemeData(
   primaryColor: primaryBlueColor,
@@ -59,6 +77,11 @@ final ThemeData theme = ThemeData(
       color: titleTextColor,
       fontSize: titleSmallFontSize,
     ),
+    titleMedium: TextStyle(
+      color: titleTextColor,
+      fontSize: titleDefaultFontSize,
+      fontWeight: defaultBoldWeight,
+    ),
     titleLarge: TextStyle(
       color: titleTextColor,
       fontSize: titleLargeFontSize,
@@ -69,7 +92,7 @@ final ThemeData theme = ThemeData(
     ),
     displayMedium: TextStyle(
       color: secondaryTextColor,
-      fontSize: defaultBodyFontSize,
+      fontSize: displayMediumFontSize,
       fontWeight: defaultBoldWeight,
     ),
     displayLarge: TextStyle(
