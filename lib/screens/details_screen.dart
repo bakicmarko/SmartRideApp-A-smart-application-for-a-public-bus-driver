@@ -58,6 +58,13 @@ class _StatusDetailState extends State<StatusDetail> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    timer!.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     TextStyle emphText = Theme.of(context).textTheme.bodyMedium!.copyWith(color: importandTextColor);
     if (rng.nextBool()) {
@@ -142,6 +149,13 @@ class _RoadConditiondDetailsState extends State<RoadConditiondDetails> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    timer!.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final provider = context.watch<HomeProvider>();
 
@@ -195,7 +209,7 @@ class _WeatherForcastView extends StatelessWidget {
 
   final WeatherForcast weather;
   final List<String> weatherNames = ['Sunny', 'Rain', 'Show', 'Cloudy'];
-  final List<Icon> weatherIcons = [
+  final List<Icon> weatherIcons = const [
     Icon(Icons.sunny, color: Colors.white, size: defaultButtonHeight),
     Icon(Icons.cloudy_snowing, color: Colors.white, size: defaultButtonHeight),
     Icon(Icons.snowing, color: Colors.white, size: defaultButtonHeight),

@@ -24,6 +24,8 @@ dependencies:
   freezed: ^2.0.3+1
   dio: ^4.0.6
   intl: ^0.17.0
+  vector_math: ^2.1.2
+  custom_info_window: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -36,6 +38,6 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
