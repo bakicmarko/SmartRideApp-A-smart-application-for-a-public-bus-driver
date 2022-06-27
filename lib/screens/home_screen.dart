@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_ride_app/providers/home_screen_provider.dart';
 import 'package:smart_ride_app/screens/details_screen.dart';
+import 'package:smart_ride_app/screens/nav_bar.dart';
 import 'package:smart_ride_app/theme/theme.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,7 +27,8 @@ class HomeScreenContent extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreenContent> {
   final bottomScheetController = DraggableScrollableController();
-  final isDriving = true;
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+  bool isDriving = false;
   double minBottomSheet = 0.2;
   double initialChildSize = 0.2;
 
@@ -38,20 +40,23 @@ class _HomeScreenState extends State<HomeScreenContent> {
         initialChildSize = 0.1;
       });
     }
-    return SafeArea(
-      child: Scaffold(
-        extendBody: true,
-        resizeToAvoidBottomInset: false,
-        body: Stack(
+
+    return Scaffold(
+      key: scaffoldKey,
+      extendBody: true,
+      resizeToAvoidBottomInset: false,
+      drawer: NavBar(openDetailsSheet: anim),
+      body: SafeArea(
+        child: Stack(
           children: [
-            GoogleMapsEmpty(),
+            // GoogleMapsEmpty(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPaddingValue, vertical: defaultPaddingValue + 5),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   ElevatedButton(
-                    onPressed: () => {anim()},
+                    onPressed: () => {scaffoldKey.currentState!.openDrawer()},
                     style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                           fixedSize: MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
                           minimumSize: MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
@@ -93,8 +98,6 @@ class _HomeScreenState extends State<HomeScreenContent> {
               snapSizes: const [0.9],
               builder: (BuildContext context, ScrollController scrollController) {
                 return Container(
-                  /// shadowColor: primaryGreyColor,
-                  /// shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
@@ -115,7 +118,8 @@ class _HomeScreenState extends State<HomeScreenContent> {
   }
 
   void anim() {
-    bottomScheetController.animateTo(0.9, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+    bottomScheetController.animateTo(0.9, duration: const Duration(milliseconds: 250), curve: Curves.fastOutSlowIn);
+    debugPrint("callback done");
   }
 }
 
@@ -213,10 +217,14 @@ class _RideShortInfo extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: (() => {}),
-            style: Theme.of(context)
-                .elevatedButtonTheme
-                .style!
-                .copyWith(backgroundColor: MaterialStateProperty.all(redColor)),
+            style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                  backgroundColor: MaterialStateProperty.all(redColor),
+                  minimumSize:
+                      MaterialStateProperty.all(const Size(defaultButtonWidth / 1.2, defaultButtonHeight / 1.1)),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(smallButtonBorderRadius)),
+                  ),
+                ),
             child: const Text("END"),
           )
         ],

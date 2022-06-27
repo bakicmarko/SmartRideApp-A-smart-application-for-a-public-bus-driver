@@ -24,4 +24,8 @@ class HomeProvider extends RequestProvider<WeatherForcast> {
     if (_savedUser == null) await _readSavedUser();
     executeRequest(requestBuilder: () => _repo.fetchWeatherForcast(_savedUser as User));
   }
+
+  Future<void> logOutUser() async {
+    await _storage.resetStorage();
+  }
 }
