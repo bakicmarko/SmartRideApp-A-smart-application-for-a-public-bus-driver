@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_ride_app/models/User.dart';
 import 'package:smart_ride_app/providers/home_screen_provider.dart';
+import 'package:smart_ride_app/screens/about_app_screen.dart';
 import 'package:smart_ride_app/screens/drivers_screen.dart';
 import 'package:smart_ride_app/screens/login_screen.dart';
 
@@ -123,6 +124,7 @@ class _NavBarRouteButtonsState extends State<NavBarRouteButtons> {
             setState(() {
               index = 0;
             });
+            Navigator.of(context).pop();
           },
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
               shape: MaterialStateProperty.all(
@@ -217,7 +219,7 @@ class _NavBarRouteButtonsState extends State<NavBarRouteButtons> {
             setState(() {
               index = 3;
             });
-            widget.openDetailsSheet;
+            widget.openDetailsSheet();
             Navigator.pop(context);
           },
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
@@ -274,7 +276,9 @@ class NavBarBottom extends StatelessWidget {
                 )),
             IconButton(
               splashRadius: 20,
-              onPressed: () => {},
+              onPressed: () => {
+                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => const AboutAppScreen()))
+              },
               icon: const Icon(
                 Icons.info_outline,
                 color: primaryGreyColor,

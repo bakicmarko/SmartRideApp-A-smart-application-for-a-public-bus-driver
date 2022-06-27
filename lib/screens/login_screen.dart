@@ -105,9 +105,11 @@ class _ScreenContentState extends State<ScreenContent> {
                   // two text inputs with icons
                   TextFormField(
                     controller: emailController,
-                    decoration: const InputDecoration(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: titleDefaultFontSize),
+                    decoration: InputDecoration(
                       hintText: "Enter email",
-                      prefixIcon: Padding(
+                      hintStyle: Theme.of(context).textTheme.bodyMedium,
+                      prefixIcon: const Padding(
                         padding: EdgeInsets.only(bottom: 6),
                         child: Icon(Icons.alternate_email),
                       ),
@@ -116,8 +118,10 @@ class _ScreenContentState extends State<ScreenContent> {
                   const SizedBox(height: 20),
                   TextFormField(
                     controller: passwordController,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: titleDefaultFontSize),
                     decoration: InputDecoration(
                       hintText: "Enter password",
+                      hintStyle: Theme.of(context).textTheme.bodyMedium,
                       prefixIcon: const Padding(
                         padding: EdgeInsets.only(bottom: 6),
                         child: Icon(Icons.lock),
@@ -148,24 +152,40 @@ class _ScreenContentState extends State<ScreenContent> {
                       ],
                     ),
                   ),
-                  defaultHeightDivideBox,
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: ElevatedButton(
-                      onPressed: () => {
-                        if (passwordController.text.isNotEmpty && emailController.text.isNotEmpty)
-                          provider.signInUser(LogInInfo(emailController.text, passwordController.text))
-                      },
-                      style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                            minimumSize: MaterialStateProperty.all(const Size(double.infinity, defaultButtonHeight)),
-                          ),
-                      child: const Text("Submit"),
-                    ),
-                  ),
+
+                  /// defaultHeightDivideBox,
+                  /// defaultHeightDivideBox,
+                  /// defaultHeightDivideBox,
+                  /// Align(
+                  ///   alignment: Alignment.bottomCenter,
+                  ///   child: ElevatedButton(
+                  ///     onPressed: () => {
+                  ///       if (passwordController.text.isNotEmpty && emailController.text.isNotEmpty)
+                  ///         provider.signInUser(LogInInfo(emailController.text, passwordController.text))
+                  ///     },
+                  ///     style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                  ///           minimumSize: MaterialStateProperty.all(const Size(double.infinity, defaultButtonHeight)),
+                  ///         ),
+                  ///     child: const Text("Submit"),
+                  ///   ),
+                  /// ),
                 ],
               ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: defaultAllOutsidePadding,
+        child: ElevatedButton(
+          onPressed: () => {
+            if (passwordController.text.isNotEmpty && emailController.text.isNotEmpty)
+              provider.signInUser(LogInInfo(emailController.text, passwordController.text))
+          },
+          style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                minimumSize: MaterialStateProperty.all(const Size(double.infinity, defaultButtonHeight)),
+              ),
+          child: const Text("Submit"),
         ),
       ),
     );

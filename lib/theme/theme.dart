@@ -54,6 +54,7 @@ const SizedBox small2HeightDivideBox = SizedBox(height: 10);
 const SizedBox smallHeightDivideBox = SizedBox(height: 14);
 const SizedBox defaultHeightDivideBox = SizedBox(height: 20);
 const SizedBox mediumHeightDivideBox = SizedBox(height: 30);
+const SizedBox largeHeightDivideBox = SizedBox(height: 40);
 
 const SizedBox smallWidthDivideBox = SizedBox(width: 5);
 const SizedBox defaultWidthDivideBox = SizedBox(width: 20);

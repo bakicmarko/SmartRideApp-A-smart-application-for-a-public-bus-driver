@@ -220,7 +220,7 @@ class _WeatherForcastView extends StatelessWidget {
   Widget build(BuildContext context) {
     final now = DateTime.now();
     String formatter = DateFormat('yMd').format(now); // 28/03/2020
-    double sInfo = defaultButtonHeight * 2.3;
+    double sInfo = MediaQuery.of(context).size.width / 4;
     return Theme(
       data: Theme.of(context).copyWith(
           textTheme: Theme.of(context).textTheme.copyWith(bodyMedium: Theme.of(context).textTheme.displaySmall)),
@@ -249,13 +249,13 @@ class _WeatherForcastView extends StatelessWidget {
                               child: Text("20", style: Theme.of(context).textTheme.displayLarge)),
                         ),
                         Positioned(
-                            top: 0,
-                            left: sInfo / 1.7,
+                            top: -4,
+                            left: sInfo / 1.8,
                             child: Text("°C",
                                 style: Theme.of(context)
                                     .textTheme
                                     .displayMedium!
-                                    .copyWith(fontSize: 22, fontWeight: FontWeight.normal))),
+                                    .copyWith(fontSize: 20, fontWeight: FontWeight.normal))),
                       ],
                     ),
                   ),
@@ -275,15 +275,13 @@ class _WeatherForcastView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(formatter),
-                          smallestHeightDivideBox,
-                          Text(weatherNames.elementAt(weather.weather)),
-                        ],
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(formatter),
+                        smallestHeightDivideBox,
+                        Text(weatherNames.elementAt(weather.weather)),
+                      ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -360,7 +358,6 @@ class _WeatherForcastView extends StatelessWidget {
 class CabinDetails extends StatelessWidget {
   CabinDetails({Key? key}) : super(key: key);
 
-  final double containerSize = defaultButtonHeight * 2.2;
   final BoxDecoration boxDecoration = BoxDecoration(
     color: primaryGreyColor.withOpacity(.4),
     borderRadius: smallBorderRadius,
@@ -368,6 +365,8 @@ class CabinDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double containerSize = MediaQuery.of(context).size.width / 3.8;
+
     return Column(
       children: [
         Text("Cabin",
@@ -419,7 +418,7 @@ class CabinDetails extends StatelessWidget {
                 width: containerSize,
                 decoration: boxDecoration,
                 child: Padding(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

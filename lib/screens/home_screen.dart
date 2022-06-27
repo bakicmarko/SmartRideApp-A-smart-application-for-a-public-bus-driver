@@ -75,12 +75,13 @@ class _HomeScreenState extends State<HomeScreenContent> {
                         height: defaultButtonHeight,
                         child: TextFormField(
                           textAlignVertical: TextAlignVertical.bottom,
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.search),
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.search),
                             hintText: "Search location",
+                            hintStyle: Theme.of(context).textTheme.bodyMedium,
                             filled: true,
                             fillColor: secondaryTextColor,
-                            border: OutlineInputBorder(
+                            border: const OutlineInputBorder(
                                 borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
                           ),
                         ),
@@ -147,7 +148,7 @@ class _CustomScrollViewContentState extends State<CustomScrollViewContent> {
           margin: const EdgeInsets.only(top: 5),
         ),
         Padding(
-          padding: EdgeInsets.only(bottom: 5),
+          padding: const EdgeInsets.only(bottom: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -184,7 +185,7 @@ class _CustomScrollViewContentState extends State<CustomScrollViewContent> {
             ],
           ),
         ),
-        widget.isDriving ? _RideShortInfo() : Container(),
+        widget.isDriving ? const _RideShortInfo() : Container(),
         widget.isDriving ? divider : Container(),
         DetailsScreen(provider: provider),
         // drive info
