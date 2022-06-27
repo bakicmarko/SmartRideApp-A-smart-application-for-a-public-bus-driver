@@ -17,12 +17,36 @@ class NetworkRepo {
   }
 
   Future<User> signInUser(LogInInfo login_info) async {
-    final response = await _dio.get('/drivers/${login_info.email}/profile');
+    final response = await _dio.get('/drivers/${login_info.email}/profile/${login_info.email}');
     final user = User.fromJson(response.data);
 
     await _storageRepo.storeUserJson(user, 'user');
 
     return user;
+  }
+
+  Future<List<User>> getDrivers() async {
+    // just id of drivers
+    final response = await _dio.get('/drivers');
+
+    List list = response.data as List;
+
+    List<String> listOfIDs = [];
+
+    list.forEach((element) {
+      Map m = element as Map;
+      listOfIDs.add(m['id'].toString());
+    });
+
+    List<User> drivers = [];
+
+    for (int id = 5; id < 15; id++) {
+      final response2 = await _dio.get('/drivers/${id.toString()}/profile/${id.toString()}');
+      final user = User.fromJson(response2.data);
+      drivers.add(user);
+    }
+
+    return drivers;
   }
 
   Future<WeatherForcast> fetchWeatherForcast(User user) async {
