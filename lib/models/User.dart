@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -17,9 +18,19 @@ class User {
   @HiveField(5)
   final String phoneNumber;
   @HiveField(4)
-  final double rating;
+  double rating;
 
-  User(this.id, this.email, this.firstName, this.surName, this.phoneNumber, this.rating);
+  User(this.id, this.email, this.firstName, this.surName, this.phoneNumber, this.rating) {
+    if (rating > 5.0) {
+      double newValue = double.parse((rating % 5 + 1).toStringAsFixed(1));
+      // debugPrint(newValue.toString());
+      if (newValue > 5.0) {
+        rating = 5.0;
+      } else {
+        rating = newValue;
+      }
+    }
+  }
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
