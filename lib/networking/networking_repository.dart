@@ -7,6 +7,7 @@ import 'package:smart_ride_app/models/login_info.dart';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:smart_ride_app/models/request.dart';
+import 'package:smart_ride_app/models/route.dart' as custom_route;
 import 'package:smart_ride_app/models/weather_forcast.dart';
 import 'package:smart_ride_app/networking/network_error_interceptor.dart';
 import 'api_constants.dart';
@@ -77,6 +78,15 @@ class NetworkRepo {
     }
 
     return requestsList;
+  }
+
+  Future<custom_route.Route> getRoute() async {
+    User? user = await _storageRepo.getUser;
+    final response = await _dio.get('/drivers/${user!.id}/route/${user.id}');
+
+    final route = custom_route.Route.fromJson(response.data);
+
+    return route;
   }
 
   Future<WeatherForcast> fetchWeatherForcast(User user) async {
