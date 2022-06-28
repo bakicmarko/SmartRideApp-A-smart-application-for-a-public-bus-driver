@@ -1,9 +1,13 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_ride_app/providers/home_screen_provider.dart';
 import 'package:smart_ride_app/screens/details_screen.dart';
 import 'package:smart_ride_app/screens/nav_bar.dart';
+import 'package:smart_ride_app/screens/show_route_pop_up.dart';
 import 'package:smart_ride_app/theme/theme.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -40,6 +44,10 @@ class _HomeScreenState extends State<HomeScreenContent> {
         initialChildSize = 0.1;
       });
     }
+    double topOffset = MediaQuery.of(context).size.height * (1 - initialChildSize) - 105;
+    debugPrint(topOffset.toString());
+    EdgeInsets allPading =
+        const EdgeInsets.symmetric(horizontal: defaultPaddingValue, vertical: defaultPaddingValue + 5);
 
     return Scaffold(
       key: scaffoldKey,
@@ -49,9 +57,9 @@ class _HomeScreenState extends State<HomeScreenContent> {
       body: SafeArea(
         child: Stack(
           children: [
-            // GoogleMapsEmpty(),
+            GoogleMapsEmpty(allPading: allPading, topOffset: topOffset),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPaddingValue, vertical: defaultPaddingValue + 5),
+              padding: allPading,
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -87,8 +95,23 @@ class _HomeScreenState extends State<HomeScreenContent> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
+              ),
+            ),
+            Positioned(
+              top: topOffset,
+              child: Padding(
+                padding: allPading,
+                child: ElevatedButton(
+                  onPressed: () => {
+                    showDialog(
+                      context: context,
+                      builder: (context) => Center(child: ShowRoutePopUp(currentStation: Random().nextInt(6) + 1)),
+                    )
+                  },
+                  child: const Text('Show route'),
+                ),
               ),
             ),
             DraggableScrollableSheet(
@@ -135,6 +158,31 @@ class CustomScrollViewContent extends StatefulWidget {
 
 class _CustomScrollViewContentState extends State<CustomScrollViewContent> {
   List<bool> isSelected = [true, false];
+  bool stopRequested = false;
+
+  Timer? timer;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      /// Random().nextInt(2) == 2
+      if (Random().nextInt(2) == 1) {
+        setState(() {
+          stopRequested = !stopRequested;
+        });
+        debugPrint(stopRequested.toString());
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +229,8 @@ class _CustomScrollViewContentState extends State<CustomScrollViewContent> {
                 ),
               ),
               largeWidthDivideBox,
-              const Icon(Icons.close, color: primaryGreyColor, size: defaultButtonHeight * (2 / 3)),
+              Icon(Icons.close,
+                  color: !stopRequested ? primaryGreyColor : redColor, size: defaultButtonHeight * (2 / 3)),
             ],
           ),
         ),
@@ -237,15 +286,23 @@ class _RideShortInfo extends StatelessWidget {
 class GoogleMapsEmpty extends StatefulWidget {
   const GoogleMapsEmpty({
     Key? key,
+    required this.topOffset,
+    required this.allPading,
   }) : super(key: key);
-
+  final double topOffset;
+  final EdgeInsets allPading;
   @override
   State<GoogleMapsEmpty> createState() => _GoogleMapsEmptyState();
 }
 
 class _GoogleMapsEmptyState extends State<GoogleMapsEmpty> {
   static const _initalCameraPosotion = CameraPosition(target: LatLng(45.800866174693226, 15.971205763215067), zoom: 13);
+
   GoogleMapController? _googleMapController;
+  void animateCamera() {
+    _googleMapController?.animateCamera(CameraUpdate.newCameraPosition(_initalCameraPosotion));
+  }
+
   final Marker _origin = const Marker(
     markerId: MarkerId('Origin'),
     infoWindow: InfoWindow(title: 'Origin'),
@@ -266,15 +323,38 @@ class _GoogleMapsEmptyState extends State<GoogleMapsEmpty> {
 
   @override
   Widget build(BuildContext context) {
-    return GoogleMap(
-      myLocationButtonEnabled: false,
-      zoomControlsEnabled: false,
-      initialCameraPosition: _initalCameraPosotion,
-      onMapCreated: (controller) => _googleMapController = controller,
-      markers: {
-        if (_origin != null) _origin as Marker,
-        if (_destination != null) _destination as Marker,
-      },
+    return Stack(
+      children: [
+        GoogleMap(
+          myLocationButtonEnabled: false,
+          zoomControlsEnabled: false,
+          initialCameraPosition: _initalCameraPosotion,
+          onMapCreated: (controller) => _googleMapController = controller,
+          markers: {
+            if (_origin != null) _origin as Marker,
+            if (_destination != null) _destination as Marker,
+          },
+        ),
+        Positioned(
+          top: widget.topOffset,
+          right: 0,
+          child: Padding(
+            padding: widget.allPading,
+            child: ElevatedButton(
+              style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                    minimumSize: MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+                  ),
+              onPressed: () => {
+                _googleMapController?.animateCamera(
+                  CameraUpdate.newCameraPosition(_initalCameraPosotion),
+                ),
+              },
+              child: const Icon(Icons.center_focus_weak, color: Colors.white),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
