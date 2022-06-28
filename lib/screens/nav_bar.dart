@@ -5,6 +5,8 @@ import 'package:smart_ride_app/providers/home_screen_provider.dart';
 import 'package:smart_ride_app/screens/about_app_screen.dart';
 import 'package:smart_ride_app/screens/drivers_screen.dart';
 import 'package:smart_ride_app/screens/login_screen.dart';
+import 'package:smart_ride_app/screens/requests_screen.dart';
+import 'package:smart_ride_app/screens/transition_animation_screen.dart';
 
 import '../theme/theme.dart';
 
@@ -39,7 +41,7 @@ class NavBar extends StatelessWidget {
             ),
             Expanded(
               flex: 4,
-              child: NavBarRouteButtons(openDetailsSheet: openDetailsSheet),
+              child: NavBarRouteButtons(openDetailsSheet: openDetailsSheet, user: provider.getUser),
             ),
             Expanded(
               flex: 3,
@@ -104,9 +106,10 @@ class NavBarHeader extends StatelessWidget {
 }
 
 class NavBarRouteButtons extends StatefulWidget {
-  const NavBarRouteButtons({Key? key, required this.openDetailsSheet}) : super(key: key);
+  const NavBarRouteButtons({Key? key, required this.openDetailsSheet, required this.user}) : super(key: key);
 
   final VoidCallback openDetailsSheet;
+  final User? user;
 
   @override
   State<NavBarRouteButtons> createState() => _NavBarRouteButtonsState();
@@ -156,6 +159,8 @@ class _NavBarRouteButtonsState extends State<NavBarRouteButtons> {
             setState(() {
               index = 1;
             });
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (BuildContext context) => RequestsScreen(user: widget.user)));
           },
           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
               shape: MaterialStateProperty.all(
@@ -268,7 +273,9 @@ class NavBarBottom extends StatelessWidget {
                 onPressed: () async => {
                       await logOutUser(),
                       Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute<void>(builder: (BuildContext context) => LogInScreen()), (route) => false),
+                          MaterialPageRoute<void>(
+                              builder: (BuildContext context) => const TransitionScreen(nextScreen: LogInScreen())),
+                          (route) => false),
                     },
                 child: Text(
                   'Logout',

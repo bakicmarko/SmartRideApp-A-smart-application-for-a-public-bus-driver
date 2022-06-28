@@ -1,8 +1,12 @@
+import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
 import 'package:smart_ride_app/local_storage/storage_repo.dart';
 import 'package:smart_ride_app/models/User.dart';
 import 'package:smart_ride_app/models/login_info.dart';
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:smart_ride_app/models/request.dart';
 import 'package:smart_ride_app/models/weather_forcast.dart';
 import 'package:smart_ride_app/networking/network_error_interceptor.dart';
 import 'api_constants.dart';
@@ -16,8 +20,8 @@ class NetworkRepo {
     _dio.interceptors.add(ErrorExtractorInterceptor());
   }
 
-  Future<User> signInUser(LogInInfo login_info) async {
-    final response = await _dio.get('/drivers/${login_info.email}/profile/${login_info.email}');
+  Future<User> signInUser(LogInInfo loginInfo) async {
+    final response = await _dio.get('/drivers/${loginInfo.email}/profile/${loginInfo.email}');
     final user = User.fromJson(response.data);
 
     await _storageRepo.storeUserJson(user, 'user');
@@ -49,8 +53,34 @@ class NetworkRepo {
     return drivers;
   }
 
+  Future<List<Request>> getRequests(User user) async {
+    final responseDrivers = await _dio.get('/drivers');
+
+    List listDrivers = responseDrivers.data as List;
+
+    List<String> listOfIDs = [];
+
+    for (var element in listDrivers) {
+      Map m = element as Map;
+      listOfIDs.add(m['id'].toString());
+    }
+
+    final random = Random();
+    List<Request> requestsList = [];
+
+    for (int i = 0; i < 10; i++) {
+      String id = listOfIDs[random.nextInt(listOfIDs.length - 10)];
+      debugPrint('/drivers/$id/reviews/$id');
+      final responseRequest = await _dio.get('/drivers/$id/reviews/$id');
+      final request = Request.fromJson(responseRequest.data);
+      requestsList.add(request);
+    }
+
+    return requestsList;
+  }
+
   Future<WeatherForcast> fetchWeatherForcast(User user) async {
-    final response = await _dio.get('/drivers/${user.id}/wather_forcast/1');
+    final response = await _dio.get('/drivers/${user.id}/wather_forcast/${user.id}');
     final weather = WeatherForcast.fromJson(response.data);
 
     return weather;
