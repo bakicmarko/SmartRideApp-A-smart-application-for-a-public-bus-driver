@@ -37,7 +37,7 @@ class AboutAppScreen extends StatelessWidget {
                   children: const [
                     CustomRowLayout(
                       textKey: 'Title:',
-                      textValues: ['Smart application for bud drivers in public transport'],
+                      textValues: ['Smart application for bus drivers in public transport'],
                       numberOfLines: 1,
                       isLast: false,
                     ),
@@ -71,7 +71,7 @@ class AboutAppScreen extends StatelessWidget {
                     ),
                     CustomRowLayout(
                       textKey: 'Year:',
-                      textValues: ['2022/2023'],
+                      textValues: ['2023/2022'],
                       numberOfLines: 1,
                       isLast: false,
                     ),
