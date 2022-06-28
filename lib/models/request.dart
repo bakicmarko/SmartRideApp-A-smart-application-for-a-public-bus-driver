@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+// ignore: depend_on_referenced_packages
 import 'package:json_annotation/json_annotation.dart' show JsonSerializable;
 
 part 'request.g.dart';

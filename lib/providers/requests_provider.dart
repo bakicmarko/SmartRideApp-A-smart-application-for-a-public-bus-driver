@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:smart_ride_app/local_storage/storage_repo.dart';
 import 'package:smart_ride_app/models/User.dart';
-import 'package:smart_ride_app/models/login_info.dart';
 import 'package:smart_ride_app/models/request.dart';
 
 /// import 'package:smart_ride_app/models/User.dart';

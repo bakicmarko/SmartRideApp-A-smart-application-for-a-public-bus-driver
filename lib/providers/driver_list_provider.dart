@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:smart_ride_app/models/User.dart';
 import 'package:smart_ride_app/networking/networking_repository.dart';
 import 'request_provider.dart';

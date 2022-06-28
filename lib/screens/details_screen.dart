@@ -9,9 +9,9 @@ import 'package:intl/intl.dart';
 import 'package:smart_ride_app/theme/theme.dart';
 
 class DetailsScreen extends StatelessWidget {
-  DetailsScreen({Key? key, required this.provider}) : super(key: key);
+  const DetailsScreen({Key? key, required this.provider}) : super(key: key);
 
-  HomeProvider provider;
+  final HomeProvider provider;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,6 @@ class _StatusDetailState extends State<StatusDetail> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     timer!.cancel();
     super.dispose();
   }
@@ -139,8 +138,6 @@ class _RoadConditiondDetailsState extends State<RoadConditiondDetails> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     timer = Timer.periodic(const Duration(seconds: 15), (Timer t) {
       setState(() {});
     });
@@ -150,7 +147,6 @@ class _RoadConditiondDetailsState extends State<RoadConditiondDetails> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     timer!.cancel();
     super.dispose();
   }
@@ -322,7 +318,7 @@ class _WeatherForcastView extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text('Humidity',
-                                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                                   Text('${weather.humidity.toString()} %', style: const TextStyle(color: Colors.white)),
                                 ],
                               ),
@@ -450,7 +446,7 @@ class CabinDetails extends StatelessWidget {
                 width: containerSize,
                 decoration: boxDecoration,
                 child: Padding(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

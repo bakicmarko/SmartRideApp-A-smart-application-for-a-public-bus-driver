@@ -30,13 +30,11 @@ class NavBar extends StatelessWidget {
         padding: defaultAllOutsidePadding,
         child: Column(
           children: [
-            Expanded(
+            const Expanded(
               flex: 3,
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
-
-                /// color: Colors.yellow,
-                child: const NavBarHeader(),
+                child: NavBarHeader(),
               ),
             ),
             Expanded(

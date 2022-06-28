@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_ride_app/models/request.dart';
-import 'package:vector_math/vector_math.dart' as vector_math;
 import 'package:provider/provider.dart';
 import 'package:smart_ride_app/providers/home_screen_provider.dart';
 import 'package:smart_ride_app/screens/details_screen.dart';
@@ -316,7 +315,6 @@ class _CustomScrollViewContentState extends State<CustomScrollViewContent> {
 
   @override
   void initState() {
-    // TODO: implement initState
     timer = Timer.periodic(const Duration(seconds: 15), (Timer t) {
       /// Random().nextInt(2) == 2
       if (Random().nextInt(2) == 1) {
@@ -331,7 +329,6 @@ class _CustomScrollViewContentState extends State<CustomScrollViewContent> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     timer?.cancel();
     super.dispose();
   }
@@ -408,9 +405,9 @@ class _CustomScrollViewContentState extends State<CustomScrollViewContent> {
 class _RideShortInfo extends StatelessWidget {
   _RideShortInfo({Key? key}) : super(key: key);
 
-  Random rnd = Random();
+  final Random rnd = Random();
 
-  List<String> startings = [
+  final List<String> startings = [
     "81538 Shaun Drive",
     "5335 Upton Forge",
     "1212 Annie Lodge",
@@ -425,7 +422,7 @@ class _RideShortInfo extends StatelessWidget {
     "98021 Hermann Street",
   ];
 
-  List<String> destinations = [
+  final List<String> destinations = [
     "50125 Miller Flat",
     "148 Thora River",
     "972 Leila Ferry",
@@ -445,7 +442,7 @@ class _RideShortInfo extends StatelessWidget {
     "67957 Rylee Isle",
     "98140 Candelario Mission",
   ];
-  List<String> nextStations = [
+  final List<String> nextStations = [
     "Maria Village",
     "Riley Extension",
     "Rodriguez Spur",
@@ -558,7 +555,6 @@ class _GoogleMapsEmptyState extends State<GoogleMapsEmpty> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _googleMapController?.dispose();
     super.dispose();
   }

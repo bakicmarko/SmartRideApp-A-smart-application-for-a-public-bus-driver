@@ -150,7 +150,7 @@ final ThemeData theme = ThemeData(
       /// shadowColor: primaryGreyColor,
     ),
   ),
-  toggleButtonsTheme: ToggleButtonsThemeData(),
+  toggleButtonsTheme: const ToggleButtonsThemeData(),
   inputDecorationTheme: const InputDecorationTheme(
     hintStyle: TextStyle(color: primaryGreyColor),
     prefixIconColor: primaryGreyColor,

@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:smart_ride_app/local_storage/storage_repo.dart';
 import 'package:smart_ride_app/models/User.dart';
 import 'package:smart_ride_app/models/login_info.dart';
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:smart_ride_app/models/request.dart';
 import 'package:smart_ride_app/models/route.dart' as custom_route;
@@ -38,10 +37,10 @@ class NetworkRepo {
 
     List<String> listOfIDs = [];
 
-    list.forEach((element) {
+    for (var element in list) {
       Map m = element as Map;
       listOfIDs.add(m['id'].toString());
-    });
+    }
 
     List<User> drivers = [];
 

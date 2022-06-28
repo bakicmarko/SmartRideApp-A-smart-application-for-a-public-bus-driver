@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +23,7 @@ class SmartRideApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme,
-        home: isUserLoggedIn ? HomeScreen() : LogInScreen(),
+        home: isUserLoggedIn ? const HomeScreen() : const LogInScreen(),
       ),
     );
   }

@@ -110,7 +110,6 @@ class _DeiversGoogleMapState extends State<DeiversGoogleMap> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _googleMapController?.dispose();
     _customInfoWindowController.dispose();
     super.dispose();
@@ -138,9 +137,9 @@ class _DeiversGoogleMapState extends State<DeiversGoogleMap> {
     double y = w * sin(t);
 
     // Adjust the x-coordinate for the shrinking of the east-west distances
-    double new_x = x / cos(vector_math.radians(y0));
+    double newX = x / cos(vector_math.radians(y0));
 
-    double foundLongitude = new_x + x0;
+    double foundLongitude = newX + x0;
     double foundLatitude = y + y0;
     return LatLng(foundLongitude, foundLatitude);
   }

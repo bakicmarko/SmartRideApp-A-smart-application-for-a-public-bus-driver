@@ -59,7 +59,7 @@ class HomeProvider extends RequestProvider<WeatherForcast> {
     return await _repo.getOneRequest();
   }
 
-  Request? _flexibleRequest = null;
+  Request? _flexibleRequest;
   get flexibleRequest => _flexibleRequest;
   set setFlexibleRequest(Request? req) {
     _flexibleRequest = req;
@@ -242,9 +242,9 @@ class HomeProvider extends RequestProvider<WeatherForcast> {
     double y = w * sin(t);
 
     // Adjust the x-coordinate for the shrinking of the east-west distances
-    double new_x = x / cos(vector_math.radians(y0));
+    double newX = x / cos(vector_math.radians(y0));
 
-    double foundLongitude = new_x + x0;
+    double foundLongitude = newX + x0;
     double foundLatitude = y + y0;
     return LatLng(foundLongitude, foundLatitude);
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_ride_app/models/login_info.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:smart_ride_app/providers/listeners/provider_listener.dart';
 import 'package:smart_ride_app/providers/login_provider.dart';
@@ -15,7 +14,6 @@ class LogInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return ChangeNotifierProvider(
       create: (context) => LogInProvider(context.read()),
       child: const _LogInScreenView(),
@@ -44,8 +42,6 @@ class _LogInScreenView extends StatelessWidget {
                       ),
                     ),
                 success: (_) {
-                  /// return Navigator.of(context)
-                  ///     .pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => const TransitionScreen(nextScreen: HomeScreen())));
                 })

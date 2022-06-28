@@ -4,7 +4,6 @@ import 'package:wave/config.dart';
 
 import 'dart:async';
 
-import 'package:smart_ride_app/screens/home_screen.dart';
 import 'package:smart_ride_app/theme/theme.dart';
 import 'package:wave/wave.dart';
 
@@ -32,7 +31,6 @@ class _TransitionScreenState extends State<TransitionScreen> with SingleTickerPr
 
   @override
   void initState() {
-    // TODO: implement initState
     Timer(
       const Duration(seconds: 4),
       () => Navigator.of(context).pushReplacement(
