@@ -16,11 +16,11 @@ class WeatherForcast {
   int weather;
   @HiveField(3)
   int pressure;
-  @HiveField(5)
-  int humidity;
   @HiveField(4)
-  int precipitation;
+  int humidity;
   @HiveField(5)
+  int precipitation;
+  @HiveField(6)
   int wind;
 
   WeatherForcast(this.id, this.temperature, this.weather, this.pressure, this.humidity, this.precipitation)

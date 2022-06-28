@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:json_annotation/json_annotation.dart' show JsonSerializable;
 
 part 'User.g.dart';
 
@@ -19,8 +19,12 @@ class User {
   final String phoneNumber;
   @HiveField(4)
   double rating;
+  @HiveField(6)
+  final String location;
+  @HiveField(7)
+  final String password;
 
-  User(this.id, this.email, this.firstName, this.surName, this.phoneNumber, this.rating) {
+  User(this.id, this.email, this.firstName, this.surName, this.phoneNumber, this.rating, this.location, this.password) {
     if (rating > 5.0) {
       double newValue = double.parse((rating % 5 + 1).toStringAsFixed(1));
       // debugPrint(newValue.toString());

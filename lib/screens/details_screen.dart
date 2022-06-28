@@ -428,9 +428,12 @@ class CabinDetails extends StatelessWidget {
                         color: secondaryTextColor,
                         size: containerSize / 3,
                       ),
-                      Text(
-                        "21",
-                        style: Theme.of(context).textTheme.displayMedium,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 1),
+                        child: Text(
+                          "21",
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
                       )
                     ],
                   ),
@@ -452,10 +455,14 @@ class CabinDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
-                        Icons.airline_seat_recline_extra_outlined,
-                        color: Colors.transparent,
-                        size: containerSize / 3,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 13),
+                        child: Image.asset(
+                          'assets/images/airline_seat_empty.png',
+                          height: containerSize / 6,
+                          color: Colors.white,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                       Text(
                         "30",

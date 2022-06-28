@@ -21,15 +21,15 @@ class WeatherForcastAdapter extends TypeAdapter<WeatherForcast> {
       fields[1] as int,
       fields[2] as int,
       fields[3] as int,
-      fields[5] as int,
       fields[4] as int,
-    );
+      fields[5] as int,
+    )..wind = fields[6] as int;
   }
 
   @override
   void write(BinaryWriter writer, WeatherForcast obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,10 +38,12 @@ class WeatherForcastAdapter extends TypeAdapter<WeatherForcast> {
       ..write(obj.weather)
       ..writeByte(3)
       ..write(obj.pressure)
-      ..writeByte(5)
-      ..write(obj.humidity)
       ..writeByte(4)
-      ..write(obj.precipitation);
+      ..write(obj.humidity)
+      ..writeByte(5)
+      ..write(obj.precipitation)
+      ..writeByte(6)
+      ..write(obj.wind);
   }
 
   @override
@@ -67,7 +69,7 @@ WeatherForcast _$WeatherForcastFromJson(Map<String, dynamic> json) =>
       json['pressure'] as int,
       json['humidity'] as int,
       json['precipitation'] as int,
-    );
+    )..wind = json['wind'] as int;
 
 Map<String, dynamic> _$WeatherForcastToJson(WeatherForcast instance) =>
     <String, dynamic>{
@@ -77,4 +79,5 @@ Map<String, dynamic> _$WeatherForcastToJson(WeatherForcast instance) =>
       'pressure': instance.pressure,
       'humidity': instance.humidity,
       'precipitation': instance.precipitation,
+      'wind': instance.wind,
     };

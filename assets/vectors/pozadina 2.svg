@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg9318"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="pozadina 2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview9320"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.6554513"
+     inkscape:cx="350.96171"
+     inkscape:cy="485.66818"
+     inkscape:window-width="1600"
+     inkscape:window-height="837"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs9315">
+    <pattern
+       id="EMFhbasepattern"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+    <pattern
+       id="EMFhbasepattern-0"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+    <pattern
+       id="EMFhbasepattern-9"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+    <pattern
+       id="EMFhbasepattern-8"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+    <pattern
+       id="EMFhbasepattern-2"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+    <pattern
+       id="EMFhbasepattern-87"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+    <pattern
+       id="EMFhbasepattern-20"
+       patternUnits="userSpaceOnUse"
+       width="6"
+       height="6"
+       x="0"
+       y="0" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#d5eefb;stroke-width:0.352417;fill-opacity:1"
+       d="M 68.930828,142.85141 V 92.453633 h 28.370803 28.370799 l -0.0893,50.307577 -0.0893,50.30758 -28.281499,0.0902 -28.281493,0.0902 z"
+       id="path10187" />
+    <path
+       style="fill:#a3bff8;fill-opacity:1;stroke-width:0.349939"
+       d="m 69.373792,170.69442 v -22.50967 h 28.027952 28.027936 v 14.53927 c 0,7.9966 0.10334,18.12596 0.22963,22.50967 l 0.22963,7.9704 H 97.631369 69.373792 Z"
+       id="path11652" />
+    <path
+       style="fill:#a3bff8;fill-opacity:1;stroke-width:0.352902"
+       d="m 102.18226,150.56248 c -0.28484,-0.34155 -2.406538,-0.39016 -9.51735,-0.21798 -5.03293,0.12186 -12.378135,0.24054 -16.322678,0.26373 l -7.171894,0.0422 v -12.65904 -12.65904 h 1.259838 c 2.210073,0 4.240741,0.71864 6.030683,2.13422 0.957414,0.75717 2.21888,1.68296 2.803256,2.0573 0.584377,0.37434 1.759359,1.20012 2.611071,1.83506 1.24048,0.92477 2.01556,1.20258 3.895844,1.39635 3.126539,0.32222 4.21689,-0.11824 11.367403,-4.59202 3.171967,-1.98457 6.424447,-3.90463 7.227737,-4.26681 3.26157,-1.47053 7.45381,-0.37896 9.95518,2.59214 1.92177,2.28262 6.76243,4.45368 9.95719,4.46582 l 1.09762,0.004 0.22866,3.42849 c 0.12578,1.88568 0.2295,6.39546 0.23051,10.02174 l 0.002,6.59326 h -7.23954 c -4.44431,0 -7.32404,-0.13578 -7.45841,-0.35165 -0.12039,-0.19339 -0.75789,-0.35164 -1.41668,-0.35164 -0.65878,0 -1.29628,0.15825 -1.41667,0.35164 -0.32592,0.5236 -5.67771,0.44677 -6.1236,-0.0879 z"
+       id="path14621" />
+    <path
+       style="fill:#6b8bdc;stroke-width:0.352417;fill-opacity:1"
+       d="m 84.5525,150.30601 -15.24205,-0.0918 v -12.68332 -12.68333 h 1.43033 c 1.07876,0 1.77176,0.27438 2.81934,1.11624 0.76395,0.61393 1.38901,1.39751 1.38901,1.74129 0,0.34378 0.17855,0.73541 0.39679,0.87028 0.38201,0.2361 0.28477,2.38971 -0.26525,5.87461 -0.49016,3.10559 0.9292,4.21929 4.38246,3.43872 2.11928,-0.47903 6.42674,-2.60958 9.77569,-4.83522 1.10382,-0.73358 2.57797,-1.62912 3.2759,-1.99011 0.69792,-0.36098 1.43199,-0.85191 1.63126,-1.09095 0.19927,-0.23904 0.86633,-0.63221 1.48234,-0.87371 0.61602,-0.2415 1.20575,-0.66245 1.31051,-0.93545 0.10476,-0.27299 0.43333,-0.49636 0.73016,-0.49636 0.29683,0 0.53968,-0.16204 0.53968,-0.3601 0,-0.54588 4.22904,-3.16407 5.11077,-3.16407 0.42487,0 1.15357,-0.33218 1.61935,-0.73817 0.71086,-0.61962 1.19737,-0.71618 3.02952,-0.6013 1.40506,0.0881 2.41937,0.35109 2.84709,0.73817 0.36543,0.33072 0.91101,0.6013 1.2124,0.6013 1.03677,0 3.15786,2.89245 5.00699,6.82783 2.63982,5.61817 4.58779,7.62128 7.41148,7.62128 h 1.25096 v 5.9911 5.9911 h -7.37996 c -4.53984,0 -7.46379,-0.13563 -7.59778,-0.35242 -0.28472,-0.46069 -2.18501,-0.45615 -2.47057,0.006 -0.1352,0.21875 -1.82489,0.32171 -4.33791,0.26432 -2.26405,-0.0517 -10.97538,-0.13533 -19.35851,-0.18582 z"
+       id="path15360" />
+  </g>
+</svg>

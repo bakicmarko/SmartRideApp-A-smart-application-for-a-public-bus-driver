@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_ride_app/models/User.dart';
 import 'package:smart_ride_app/providers/driver_list_provider.dart';
+import 'package:smart_ride_app/providers/listeners/provider_listener.dart';
 import 'dart:math';
 import 'package:vector_math/vector_math.dart' as vector_math;
 import 'package:custom_info_window/custom_info_window.dart';
@@ -22,11 +23,48 @@ class DriversScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => DriversListProvider(context.read()),
-      child: Scaffold(
-        body: SafeArea(
-            child: Stack(
+      child: const _DriversScreenView(),
+    );
+  }
+}
+
+class _DriversScreenView extends StatelessWidget {
+  const _DriversScreenView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ProviderListener<DriversListProvider>(
+      listener: ((context, provider) => {
+            provider.state.maybeMap(
+              orElse: () => Container(),
+              failure: (exception) => showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  title: Text(
+                    'Failed to fetch drivers, $checkIntConnectionErrorM',
+                    maxLines: 15,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+              ),
+            )
+          }),
+      child: const _DriversScreenContent(),
+    );
+  }
+}
+
+class _DriversScreenContent extends StatelessWidget {
+  const _DriversScreenContent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
           children: [
-            DeiversGoogleMap(),
+            const DeiversGoogleMap(),
             Positioned(
               child: Align(
                 alignment: Alignment.topLeft,
@@ -40,7 +78,7 @@ class DriversScreen extends StatelessWidget {
               ),
             ),
           ],
-        )),
+        ),
       ),
     );
   }
@@ -184,7 +222,7 @@ class _DeiversGoogleMapState extends State<DeiversGoogleMap> {
                         ),
                         smallestHeightDivideBox,
                         Text(element.phoneNumber, style: Theme.of(context).textTheme.titleSmall),
-                        Text(element.phoneNumber, style: Theme.of(context).textTheme.titleSmall),
+                        Text(element.location, style: Theme.of(context).textTheme.titleSmall),
                         Text(
                           element.email,
                           style: Theme.of(context).textTheme.bodySmall,

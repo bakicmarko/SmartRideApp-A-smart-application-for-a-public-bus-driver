@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 const Color primaryBlueColor = Color.fromRGBO(107, 139, 219, 1);
+const Color lightBlueColor = Color.fromRGBO(168, 197, 252, 1);
+const Color lightestBlueColor = Color.fromRGBO(219, 243, 253, 1);
 const Color primaryGreyColor = Color.fromRGBO(171, 170, 170, 1);
 
 const Color primaryTextColor = primaryGreyColor;
@@ -20,6 +22,7 @@ const double titleSmallFontSize = 10;
 const double titleDefaultFontSize = 15;
 const double titleLargeFontSize = 45;
 
+const double displaySmallFontSize = 15;
 const double displayMediumFontSize = 17;
 
 const FontWeight defaultBoldWeight = FontWeight.w500;
@@ -39,14 +42,21 @@ const double defaultButtonBorderRadius = 20;
 
 const double defaultButtonTextFontSize = 15;
 
+const double smallestPaddingValue = 7;
 const double smallPaddingValue = 10;
 const double defaultPaddingValue = 20;
 const double mediumPaddingValue = 30;
+
 const EdgeInsetsGeometry smallAllOutsidePadding = EdgeInsets.all(smallPaddingValue);
 const EdgeInsetsGeometry defaultAllOutsidePadding = EdgeInsets.all(defaultPaddingValue);
 const EdgeInsetsGeometry mediumAllOutsidePadding = EdgeInsets.all(mediumPaddingValue);
+
 const EdgeInsetsGeometry defaultHorizontalPadding = EdgeInsets.symmetric(horizontal: defaultPaddingValue);
 const EdgeInsetsGeometry smallHorizontalPadding = EdgeInsets.symmetric(horizontal: smallPaddingValue);
+
+const EdgeInsetsGeometry smallest2VerticalPadding = EdgeInsets.symmetric(vertical: 1);
+const EdgeInsetsGeometry smallestVerticalPadding = EdgeInsets.symmetric(vertical: smallestPaddingValue);
+const EdgeInsetsGeometry smallVerticalPadding = EdgeInsets.symmetric(vertical: smallPaddingValue);
 const EdgeInsetsGeometry defaultVerticalPadding = EdgeInsets.symmetric(vertical: defaultPaddingValue);
 
 const SizedBox smallestHeightDivideBox = SizedBox(height: 5);
@@ -67,7 +77,11 @@ BorderRadius defaultBorderRadius = BorderRadius.circular(30);
 Divider divider = Divider(thickness: 2, color: primaryGreyColor.withOpacity(.5));
 
 double iconSizeValue = 70;
+double iconSizeValueSmall = 15;
 Size iconSize = Size(iconSizeValue, iconSizeValue);
+Size iconSizeSmall = Size(iconSizeValue, iconSizeValue);
+
+const String checkIntConnectionErrorM = 'please check your internet connection';
 
 final ThemeData theme = ThemeData(
   primaryColor: primaryBlueColor,
