@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_ride_app/models/login_info.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:smart_ride_app/providers/listeners/provider_listener.dart';
 import 'package:smart_ride_app/providers/login_provider.dart';
 import 'package:smart_ride_app/screens/home_screen.dart';
+import 'package:smart_ride_app/screens/transition_animation_screen.dart';
 
 import 'package:smart_ride_app/theme/theme.dart';
 
@@ -34,7 +36,7 @@ class _LogInScreenView extends StatelessWidget {
                       context: context,
                       builder: (_) => AlertDialog(
                         title: Text(
-                          exception.error.toString(),
+                          'Failed to login, $checkIntConnectionErrorM',
                           maxLines: 15,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodyMedium,
@@ -42,8 +44,10 @@ class _LogInScreenView extends StatelessWidget {
                       ),
                     ),
                 success: (_) {
-                  return Navigator.of(context)
-                      .pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
+                  /// return Navigator.of(context)
+                  ///     .pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const TransitionScreen(nextScreen: HomeScreen())));
                 })
           }),
       child: const ScreenContent(),
@@ -82,13 +86,13 @@ class _ScreenContentState extends State<ScreenContent> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: double.infinity,
-              height: 280,
-              color: Colors.red,
-              child: Center(
-                child: Text("BLABLABLA", style: Theme.of(context).textTheme.bodySmall),
-              ),
-            ),
+                width: double.infinity,
+                color: redColor,
+                height: 300,
+                child: Image.asset(
+                  'assets/images/login_art.png',
+                  fit: BoxFit.fill,
+                )),
             Padding(
               padding: mediumAllOutsidePadding,
               child: Column(
