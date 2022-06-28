@@ -108,21 +108,20 @@ class _DeiversGoogleMapState extends State<DeiversGoogleMap> {
     super.initState();
   }
 
-  static Future<Uint8List> getBytesFromAsset(String path, int width) async {
-    // WidgetsFlutterBinding.ensureInitialized();
-    ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
-    ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
-  }
-// make sure to initialize before map loading
-
   @override
   void dispose() {
     // TODO: implement dispose
     _googleMapController?.dispose();
     _customInfoWindowController.dispose();
     super.dispose();
+  }
+
+  static Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    // WidgetsFlutterBinding.ensureInitialized();
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
   }
 
   LatLng getLocation(double x0, double y0, int radius) {

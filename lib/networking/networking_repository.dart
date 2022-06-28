@@ -80,6 +80,14 @@ class NetworkRepo {
     return requestsList;
   }
 
+  Future<Request> getOneRequest() async {
+    int id = Random().nextInt(30) + 1;
+    final responseRequest = await _dio.get('/drivers/$id/reviews/$id');
+    final request = Request.fromJson(responseRequest.data);
+
+    return request;
+  }
+
   Future<custom_route.Route> getRoute() async {
     User? user = await _storageRepo.getUser;
     final response = await _dio.get('/drivers/${user!.id}/route/${user.id}');
