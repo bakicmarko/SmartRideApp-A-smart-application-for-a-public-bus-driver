@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_ride_app/local_storage/storage_repo.dart';
 import 'package:smart_ride_app/models/User.dart';
 import 'package:smart_ride_app/models/login_info.dart';
@@ -10,14 +12,46 @@ import 'package:smart_ride_app/models/route.dart' as custom_route;
 import 'package:smart_ride_app/models/weather_forcast.dart';
 import 'package:smart_ride_app/networking/network_error_interceptor.dart';
 import 'api_constants.dart';
+import 'package:smart_ride_app/.env.dart';
 
 class NetworkRepo {
   final StorageRepo _storageRepo;
   late final Dio _dio;
+  late final Dio _dioGooglePlaces;
+  late final Dio _dioGooglePlaces2;
+  final String _findPlaceUrl = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?';
+  final String _findPlaceDetailsUrl = 'https://maps.googleapis.com/maps/api/place/details/json?';
 
   NetworkRepo(this._storageRepo) {
     _dio = Dio(BaseOptions(baseUrl: ApiConstants.BASE_URL));
     _dio.interceptors.add(ErrorExtractorInterceptor());
+
+    _dioGooglePlaces = Dio(BaseOptions(baseUrl: _findPlaceUrl));
+    _dioGooglePlaces.interceptors.add(ErrorExtractorInterceptor());
+
+    _dioGooglePlaces2 = Dio(BaseOptions(baseUrl: _findPlaceDetailsUrl));
+    _dioGooglePlaces2.interceptors.add(ErrorExtractorInterceptor());
+  }
+
+  Future<LatLng> findPlace(String searchName) async {
+    try {
+      final response = await _dioGooglePlaces.get('input=$searchName&inputtype=textquery&key=$APIKey');
+
+      var placeID = response.data['candidates'][0]['place_id'];
+      debugPrint(placeID);
+
+      final getPlaceResponse = await _dioGooglePlaces2.get('place_id=$placeID&key=$APIKey');
+      debugPrint(getPlaceResponse.data.toString());
+      final result = getPlaceResponse.data['result'] as Map<String, dynamic>;
+
+      final double lat = result['geometry']['location']['lat'];
+      final double lng = result['geometry']['location']['lng'];
+
+      return LatLng(lat, lng);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const LatLng(45.800866174693226, 15.971205763215067);
+    }
   }
 
   Future<User> signInUser(LogInInfo loginInfo) async {

@@ -249,6 +249,10 @@ class HomeProvider extends RequestProvider<WeatherForcast> {
     return LatLng(foundLongitude, foundLatitude);
   }
 
+  Future<LatLng> findPlace(String searchInput) async {
+    return await _repo.findPlace(searchInput);
+  }
+
   Future<void> _readSavedUser() async {
     _savedUser = await _storage.getUser;
     notifyListeners();

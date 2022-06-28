@@ -51,48 +51,54 @@ class _HomeScreenState extends State<HomeScreenContent> {
       body: SafeArea(
         child: Stack(
           children: [
-            GoogleMapsEmpty(allPading: allPading, topOffset: topOffset),
-            Padding(
-              padding: allPading,
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  ElevatedButton(
-                    onPressed: () => {scaffoldKey.currentState!.openDrawer()},
-                    style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                          fixedSize: MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
-                          minimumSize: MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: defaultBorderRadius)),
-                          padding: MaterialStateProperty.all(EdgeInsets.zero),
-                        ),
-                    child: const Icon(Icons.menu),
-                  ),
-                  defaultWidthDivideBox,
-                  Expanded(
-                    child: Material(
-                      elevation: elevatedButtonElevation,
-                      shadowColor: primaryGreyColor,
-                      shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
-                      child: SizedBox(
-                        height: defaultButtonHeight,
-                        child: TextFormField(
-                          textAlignVertical: TextAlignVertical.bottom,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.search),
-                            hintText: "Search location",
-                            hintStyle: Theme.of(context).textTheme.bodyMedium,
-                            filled: true,
-                            fillColor: secondaryTextColor,
-                            border: const OutlineInputBorder(
-                                borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            GoogleMapsEmpty(allPading: allPading, topOffset: topOffset, scaffoldKey: scaffoldKey),
+
+            /// Padding(
+            ///   padding: allPading,
+            ///   child: Row(
+            ///     mainAxisSize: MainAxisSize.max,
+            ///     children: [
+            ///       ElevatedButton(
+            ///         onPressed: () => {scaffoldKey.currentState!.openDrawer()},
+            ///         style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+            ///               fixedSize: MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
+            ///               minimumSize: MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
+            ///               shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: defaultBorderRadius)),
+            ///               padding: MaterialStateProperty.all(EdgeInsets.zero),
+            ///             ),
+            ///         child: const Icon(Icons.menu),
+            ///       ),
+            ///       defaultWidthDivideBox,
+            ///       Expanded(
+            ///         child: Material(
+            ///           elevation: elevatedButtonElevation,
+            ///           shadowColor: primaryGreyColor,
+            ///           shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
+            ///           child: SizedBox(
+            ///             height: defaultButtonHeight,
+            ///             child: TextFormField(
+            ///               controller: _searchTextController,
+            ///               textAlignVertical: TextAlignVertical.bottom,
+            ///               decoration: InputDecoration(
+            ///                 prefixIcon: const Icon(Icons.search),
+            ///                 hintText: "Search location",
+            ///                 hintStyle: Theme.of(context).textTheme.bodyMedium,
+            ///                 filled: true,
+            ///                 fillColor: secondaryTextColor,
+            ///                 border: const OutlineInputBorder(
+            ///                     borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
+            ///               ),
+            ///               onFieldSubmitted: (input) async {
+            ///                 LatLng placeLocation = await provider.findPlace(input);
+
+            ///               },
+            ///             ),
+            ///           ),
+            ///         ),
+            ///       ),
+            ///     ],
+            ///   ),
+            /// ),
             provider.isDriving && provider.drivingMode[0] == true
                 ? Positioned(
                     top: topOffset,
@@ -538,15 +544,18 @@ class GoogleMapsEmpty extends StatefulWidget {
     Key? key,
     required this.topOffset,
     required this.allPading,
+    required this.scaffoldKey,
   }) : super(key: key);
   final double topOffset;
   final EdgeInsets allPading;
+  final GlobalKey<ScaffoldState> scaffoldKey;
   @override
   State<GoogleMapsEmpty> createState() => _GoogleMapsEmptyState();
 }
 
 class _GoogleMapsEmptyState extends State<GoogleMapsEmpty> {
   static const _initalCameraPosotion = CameraPosition(target: LatLng(45.800866174693226, 15.971205763215067), zoom: 13);
+  final TextEditingController _searchTextController = TextEditingController();
 
   GoogleMapController? _googleMapController;
   void animateCamera() {
@@ -571,6 +580,53 @@ class _GoogleMapsEmptyState extends State<GoogleMapsEmpty> {
           onMapCreated: (controller) => _googleMapController = controller,
           markers: provider.markers,
           polylines: provider.polylines,
+        ),
+        Padding(
+          padding: widget.allPading,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              ElevatedButton(
+                onPressed: () => {widget.scaffoldKey.currentState!.openDrawer()},
+                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                      fixedSize: MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
+                      minimumSize: MaterialStateProperty.all(const Size(defaultButtonHeight, defaultButtonHeight)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: defaultBorderRadius)),
+                      padding: MaterialStateProperty.all(EdgeInsets.zero),
+                    ),
+                child: const Icon(Icons.menu),
+              ),
+              defaultWidthDivideBox,
+              Expanded(
+                child: Material(
+                  elevation: elevatedButtonElevation,
+                  shadowColor: primaryGreyColor,
+                  shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
+                  child: SizedBox(
+                    height: defaultButtonHeight,
+                    child: TextFormField(
+                      controller: _searchTextController,
+                      textAlignVertical: TextAlignVertical.bottom,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.search),
+                        hintText: "Search location",
+                        hintStyle: Theme.of(context).textTheme.bodyMedium,
+                        filled: true,
+                        fillColor: secondaryTextColor,
+                        border: const OutlineInputBorder(
+                            borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
+                      ),
+                      onFieldSubmitted: (input) async {
+                        LatLng placeLocation = await provider.findPlace(input);
+                        _googleMapController?.animateCamera(
+                            CameraUpdate.newCameraPosition(CameraPosition(target: placeLocation, zoom: 13)));
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         Positioned(
           top: widget.topOffset,
