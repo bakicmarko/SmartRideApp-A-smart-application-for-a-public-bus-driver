@@ -71,7 +71,7 @@ class AboutAppScreen extends StatelessWidget {
                     ),
                     CustomRowLayout(
                       textKey: 'Year:',
-                      textValues: ['2023/2022'],
+                      textValues: ['2021/2022'],
                       numberOfLines: 1,
                       isLast: false,
                     ),

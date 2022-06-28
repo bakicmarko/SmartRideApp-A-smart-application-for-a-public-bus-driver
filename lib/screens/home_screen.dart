@@ -618,8 +618,19 @@ class _GoogleMapsEmptyState extends State<GoogleMapsEmpty> {
                       ),
                       onFieldSubmitted: (input) async {
                         LatLng placeLocation = await provider.findPlace(input);
+                        MarkerId markerId = MarkerId(placeLocation.toString());
+                        Marker placeMarker = Marker(
+                            markerId: markerId,
+                            infoWindow: InfoWindow(title: _searchTextController.text),
+                            position: placeLocation,
+                            onTap: () => {
+                                  provider.removeMarker(markerId),
+                                });
+                        _searchTextController.clear();
+
                         _googleMapController?.animateCamera(
-                            CameraUpdate.newCameraPosition(CameraPosition(target: placeLocation, zoom: 13)));
+                            CameraUpdate.newCameraPosition(CameraPosition(target: placeLocation, zoom: 15)));
+                        provider.addMarker(placeMarker);
                       },
                     ),
                   ),

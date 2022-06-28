@@ -118,6 +118,18 @@ class HomeProvider extends RequestProvider<WeatherForcast> {
   LinkedHashSet<Marker> _markers = LinkedHashSet<Marker>();
   LinkedHashSet<Marker> get markers => _markers;
 
+  void addMarker(Marker mark) {
+    _markers.add(mark);
+    notifyListeners();
+  }
+
+  void removeMarker(MarkerId markerId) {
+    _markers.removeWhere(
+      (element) => element.markerId == markerId,
+    );
+    notifyListeners();
+  }
+
   final double lat = 45.800866174693226;
   final double lng = 15.971205763215067;
 
