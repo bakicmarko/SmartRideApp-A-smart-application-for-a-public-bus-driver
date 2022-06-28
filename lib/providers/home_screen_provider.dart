@@ -13,7 +13,12 @@ class HomeProvider extends RequestProvider<WeatherForcast> {
   }
 
   User? _savedUser;
-  User? get getUser => _savedUser;
+  User? get getUser {
+    if (_savedUser == null) {
+      _readSavedUser();
+    }
+    return _savedUser;
+  }
 
   Future<void> _readSavedUser() async {
     _savedUser = await _storage.getUser;
