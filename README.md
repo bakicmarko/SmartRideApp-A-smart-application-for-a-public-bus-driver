@@ -38,11 +38,11 @@ To install and run this app you need to install Flutter and Android Studio or VS
 
 <div style="display: flex; justify-content: center;">
   <div style="margin: 10px; text-align: center;">
-    <img src="assets/figma/screens/SplashScreenArt.png" alt="Splash screen" style="width: 90%;">
+    <img src="assets/figma/screens/SplashScreenArt.png" alt="Splash screen" style="width: 40%;">
     <p>Splash screen</p>
   </div>
   <div style="margin: 10px; text-align: center;">
-    <img src="assets/figma/screens/LoginScreenArt2.png" alt="Login screen" style="width: 90%;">
+    <img src="assets/figma/screens/LoginScreenArt2.png" alt="Login screen" style="width: 40%;">
     <p>Login screen</p>
   </div>
 </div>
