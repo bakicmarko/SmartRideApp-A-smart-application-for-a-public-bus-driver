@@ -35,68 +35,64 @@ To install and run this app you need to install Flutter and Android Studio or VS
 
 ## Application screens
 
+<table align="center">
+  <tr>
+    <td>Splash screen</td>
+    <td>Login screen</td>
+  </tr>
+  <tr>
+    <td valign="top"><img src="assets/figma/screens/SplashScreenArt.png"></td>
+    <td valign="top"><img src="assets/figma/screens/LoginScreenArt2.png"></td>
+  </tr>
+ </table>
 
-<div style="display: flex; justify-content: center;">
-  <div style="margin: 10px; text-align: center;">
-    <img src="assets/figma/screens/SplashScreenArt.png" alt="Splash screen" style="width: 30%;">
-    <p>Splash screen</p>
-  </div>
-  <div style="margin: 10px; text-align: center;">
-    <img src="assets/figma/screens/LoginScreenArt2.png" alt="Login screen" style="width: 30%;">
-    <p>Login screen</p>
-  </div>
-</div>
-
-<hr>
-
-<div style="display: flex; justify-content: center;">
-  <div style="margin: 10px; text-align: center;">
-    <img src="assets\figma\screens\HomeScreenFixed.png" alt="Home screen #1" style="width: 90%;">
-    <p>Home screen #1</p>
-  </div>
-  <div style="margin: 10px; text-align: center;">
-    <img src="assets\figma\screens\HomeScreenFlexible.png" alt="Home screen #2" style="width: 90%;">
-    <p>Home screen #2</p>
-  </div>
-  <div style="margin: 10px; text-align: center;">
-    <img src="assets\figma\screens\HomeScreenRequest.png" alt="Request pop up" style="width: 90%;">
-    <p>Request pop up</p>
-  </div>
-  
-</div>
 
 <hr>
 
-<div style="display: flex; justify-content: center;">
-  
-  <div style="margin: 10px; text-align: center;">
-    <img src="assets\figma\screens\HomeScreenExpandedFixed.png" alt="Status & weather" style="width: 90%;">
-    <p>Status & weather</p>
-  </div>
-  
-  <div style="margin: 10px; text-align: center;">
-    <img src="assets\figma\screens\DriversScreen.png" alt="Drivers screen" style="width: 90%;">
-    <p>Drivers screen</p>
-  </div>
-
-  <div style="margin: 10px; text-align: center;">
-    <img src="assets\figma\screens\RequestListScreen.png" alt="History" style="width: 90%;">
-    <p>History</p>
-  </div>
-</div>
+<table align="center">
+  <tr>
+    <td>Home screen fixed</td>
+    <td>Home screen flexible</td>
+    <td>Request pop up</td>
+  </tr>
+  <tr>
+    <td valign="top"><img src="assets/figma/screens/HomeScreenFixed.png"></td>
+    <td valign="top"><img src="assets/figma/screens/HomeScreenFlexible.png"></td>
+    <td valign="top"><img src="assets/figma/screens/HomeScreenRequest.png"></td>
+  </tr>
+ </table>
 
 <hr>
 
-<div style="display: flex; justify-content: center;">
-  <div style="margin: 10px; text-align: center;">
-    <img src="assets\figma\screens\RoutePopUpScreen.png" alt="Route list screen" style="width: 90%;">
-    <p>Route list screen</p>
-  </div>
-  <div style="margin: 10px; text-align: center;">
-    <img src="assets\figma\screens\SideMenuScreen.png" alt="Login screen" style="width: 90%;">
-    <p>Navigation screen</p>
-  </div>
-</div>
+<table align="center">
+  <tr>
+    <td>Status & weather</td>
+    <td>Drivers screen</td>
+    <td>History</td>
+  </tr>
+  <tr>
+    <td valign="top"><img src="assets/figma/screens/HomeScreenExpandedFixed.png"></td>
+    <td valign="top"><img src="assets/figma/screens/DriversScreen.png"></td>
+    <td valign="top"><img src="assets\figma\screens\RequestListScreen.png"></td>
+   
+  </tr>
+ </table>
+
+
+<hr>
+
+<table align="center">
+  <tr>
+    <td>Route list screen</td>
+    <td>Navigation screen</td>
+   
+  </tr>
+  <tr>
+    <td valign="top"><img src="assets/figma/screens/RoutePopUpScreen.png"></td>
+    <td valign="top"><img src="assets/figma/screens/SideMenuScreen.png"></td>
+   
+  </tr>
+ </table>
 
 
 ## Project architecture
@@ -105,7 +101,7 @@ Simplified project architecture overview.
 
  <div style="margin: 10px; text-align: center;">
     <img src="assets\figma\architecture\architecture.jpg" alt="Project architecture" style="width: 90%;">
-    <p>Flutter project overview</p>
+    
   </div>
 
 
