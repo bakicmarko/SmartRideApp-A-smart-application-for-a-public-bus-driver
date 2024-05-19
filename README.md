@@ -31,3 +31,4 @@ To install and wrun this app you need to install Flutter and Android Studio or V
 - if you have more then one AVD running, you will be asked to choose on which one you want your application to run, enter number of AVD and continue
 
 - building will take some time, few minutes at least, after building is done app will automatically start
+- newone
